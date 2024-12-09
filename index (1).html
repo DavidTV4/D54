@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPN Quick Connect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .vpn-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        #connectButton {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #connectButton:hover {
+            background-color: #45a049;
+        }
+        #connectButton:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #status {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .server-list {
+            margin-top: 15px;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="vpn-container">
+        <h2>VPN Quick Connect</h2>
+        
+        <div class="server-list">
+            <select id="serverSelect">
+                <option value="">Select Server</option>
+                <option value="us">United States</option>
+                <option value="uk">United Kingdom</option>
+                <option value="de">Germany</option>
+                <option value="jp">Japan</option>
+                <option value="au">Australia</option>
+            </select>
+        </div>
+
+        <button id="connectButton">Connect</button>
+        
+        <div id="status">Not Connected</div>
+    </div>
+
+    <script>
+        const serverSelect = document.getElementById('serverSelect');
+        const connectButton = document.getElementById('connectButton');
+        const statusDisplay = document.getElementById('status');
+
+        let isConnected = false;
+
+        serverSelect.addEventListener('change', () => {
+            connectButton.disabled = !serverSelect.value;
+        });
+
+        connectButton.addEventListener('click', () => {
+            if (isConnected) {
+                // Disconnect logic
+                statusDisplay.textContent = 'Not Connected';
+                statusDisplay.style.color = 'black';
+                connectButton.textContent = 'Connect';
+                isConnected = false;
+            } else {
+                // Connect logic
+                const selectedServer = serverSelect.value;
+                statusDisplay.textContent = `Connected to ${serverSelect.options[serverSelect.selectedIndex].text}`;
+                statusDisplay.style.color = 'green';
+                connectButton.textContent = 'Disconnect';
+                isConnected = true;
+            }
+        });
+    </script>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
